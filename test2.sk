@@ -1,0 +1,72 @@
+function Sethome_GUI(p: player):
+	set {_gui} to chest inventory with 3 rows named "셋홈"
+	set slot 1 of {_gui} to white candle named "셋홈 지정 1번" with lore "셋홈 지역을 지정합니다." and "가격 : 무료" and "쿨타임 : 2주"
+	set slot 4 of {_gui} to paper named "무료이동" with lore "쿨타임 : 1시간"
+	set slot 7 of {_gui} to emerald named "유료이동" with lore "500 DP를 사용해 쿨타임을 무시하고 이동합니다."
+	set slot 10 of {_gui} to light blue candle named "셋홈 지정 2번" with lore "셋홈 지역을 지정합니다." and "가격 : 3000 DP" and "쿨타임 : 2주"
+	set slot 13 of {_gui} to paper named "무료이동" with lore "쿨타임 : 3시간"
+	set slot 16 of {_gui} to emerald named "유료이동" with lore "1500 DP를 사용해 쿨타임을 무시하고 이동합니다."
+	set slot 19 of {_gui} to lime candle named "셋홈 지정 3번" with lore "셋홈 지역을 지정합니다." and "가격 : 6000 DP" and "쿨타임 : 2주"
+	set slot 22 of {_gui} to paper named "무료이동" with lore "쿨타임 : 5시간"
+	set slot 25 of {_gui} to emerald named "유료이동" with lore "3000 DP를 사용해 쿨타임을 무시하고 이동합니다."
+	open {_gui} to {_p}
+
+on inventory click:
+	name of event-inventory is "셋홈"
+	cancel event
+	event-inventory is not player's inventory
+	if clicked slot is 1:
+		if now >= {sethome1::%player's uuid%.reuselocation} or {sethome1::%player's uuid%.location} is not set:
+			set {sethome1::%player's uuid%.location} to location of player
+			set {sethome1::%player's uuid%.reuselocation} to now + 2 weeks
+			send "위치가 셋홈 1번에 저장되었습니다. 다음 지정 가능 시간은 %{sethome1::%player's uuid%.reuselocation}% 이후입니다." to player
+		else:
+			send "위치 지정에 실패했습니다. 지정 가능 시간은 %{sethome1::%player's uuid%.reuselocation}% 이후입니다." to player
+			
+	else if clicked slot is 4:
+		if {sethome1::%player's uuid%.location} is not set:
+			send "셋홈 위치가 지정이 되어있지 않습니다." to player
+		else if now >={sethome1::%player's uuid%.reusemove} or {sethome1::%player's uuid%.reusemove} is not set:
+			teleport player to {sethome1::%player's uuid%.location}
+			send "%{sethome1::%player's uuid%.location}% 로 순간이동 하였습니다" to player
+		else:
+			send "위치 지정에 실패했습니다. 이동 가능 시간은 %{sethome1::%player's uuid%.reusemove}% 이후입니다." to player
+	else if clicked slot is 7:
+		send "You clicked on slot 7"
+		
+	else if clicked slot is 10:
+		if {DP::%player's uuid%} >= 3000:
+			if now >= {sethome2::%player's uuid%.reuselocation} or {sethome2::%player's uuid%.location} is not set:
+				subtract 3000 from {DP::%player's uuid%}
+				set {sethome2::%player's uuid%.location} to location of player
+				set {sethome2::%player's uuid%.reuselocation} to now + 2 weeks
+				send "위치가 셋홈 2번에 저장되었습니다. 다음 지정 가능 시간은 %{sethome2::%player's uuid%.reuselocation}% 이후입니다." to player
+			else:
+				send "위치 지정에 실패했습니다. 지정 가능 시간은 %{sethome2::%player's uuid%.reuselocation}% 이후입니다." to player
+		else:
+			send "위치 지정에 실패하였습니다. 필요한 기부 포인트는 3000 포인트입니다."
+			
+	else if clicked slot is 13:
+		send "You clicked on slot 13"
+	else if clicked slot is 16:
+		send "You clicked on slot 16"
+	else if clicked slot is 19:
+		if {DP::%player's uuid%} >= 6000:
+			if now >= {sethome3::%player's uuid%.reuselocation} or {sethome3::%player's uuid%.location} is not set:
+				subtract 6000 from {DP::%player's uuid%}
+				set {sethome3::%player's uuid%.location} to location of player
+				set {sethome3::%player's uuid%.reuselocation} to now + 2 weeks
+				send "위치가 셋홈 3번에 저장되었습니다. 다음 지정 가능 시간은 %{sethome3::%player's uuid%.reuselocation}% 이후입니다." to player
+			else:
+				send "위치 지정에 실패했습니다. 지정 가능 시간은 %{sethome3::%player's uuid%.reuselocation}% 이후입니다." to player
+		else:
+			send "위치 지정에 실패하였습니다. 필요한 기부 포인트는 6000 포인트입니다."
+			
+	else if clicked slot is 22:
+		send "You clicked on slot 22"
+	else if clicked slot is 25:
+		send "You clicked on slot 25"
+
+command /sethome:
+	trigger:
+		Sethome_GUI(player)

@@ -1,0 +1,23 @@
+command /칭호설정 [<text>]:
+	trigger:
+		# 입력된 텍스트(칭호)가 20자를 넘는지 확인
+		if length of arg 1 > 20:
+			send "&c칭호는 색코드 포함 최대 20자까지 가능합니다." to player
+
+		else if arg 1 is not set:
+			send "&c칭호가 비어있어 설정이 되지 않았습니다." to player
+
+		# 플레이어의 포인트 확인
+		else:
+			if {DP::%player's uuid%} < 1400:
+				send "&c포인트가 부족합니다." to player
+			
+			# LuckPerms에서 칭호 적용
+			else:
+				remove 1400 from {DP::%player's uuid%}
+				set {_expire} to now + 2 weeks
+				execute console command "/lp user %player% meta settempprefix 990 ""[%arg 1%&r] "" 14d"
+				wait 2 ticks
+				execute console command "/chatex reload"
+				send "칭호 %arg 1% 이 성공적으로 지정되었습니다. 적용 기한은 %{_expire}% 까지입니다."
+

@@ -1,0 +1,24 @@
+on first join:
+	set {keepinven::%player's uuid%} to 0
+
+on join:
+	if {keepinven::%player's uuid%} is not set:
+		set {keepinven::%player's uuid%} to 0
+
+on death of player:
+	if victim is a player:
+		if {keepinven::%victim's uuid%} >= 1:
+			subtract 1 from {keepinven::%victim's uuid%}
+			keep inventory
+			clear drops
+			send "킵인벤 이용권을 사용해 아이템을 보존하였습니다 현재 잔여량 : %{keepinven::%victim's uuid%}%회" to victim
+
+command /keepinventory:
+	trigger:
+		if {DP::%player's uuid%} >= 1000:
+			subtract 1000 from {DP::%player's uuid%}
+			add 1 to {keepinven::%player's uuid%}
+			send "킵인벤 이용권을 구매하였습니다. 현재 잔여량 : %{keepinven::%player's uuid%}%회" to player
+		
+		else:
+			send "기부 포인트가 부족합니다!" to player

@@ -1,0 +1,11 @@
+command /playerhead [<offline player>]:
+	trigger:
+		if arg 1 is set:
+			if {DP::%player's uuid%} >= 1500:
+				remove 1500 from {DP::%player's uuid%}
+				execute console command "/give %player% player_head[profile={name:""%arg 1%""}] 1"
+				send "&a%arg 1%님의 머리를 받았습니다!" to player
+			else:
+				send "&c기부 포인트가 1500 미만입니다." to player
+		else:
+			send "&c머리를 받을 플레이어의 닉네임을 입력해주세요." to player

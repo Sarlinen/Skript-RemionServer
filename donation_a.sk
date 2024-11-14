@@ -1,0 +1,43 @@
+on join:
+	if {DP::%player's uuid%} is not set:
+		set {DP::%player's uuid%} to 0
+
+# 기부 포인트 명령어
+command /DP [<text>] [<player>] [<integer>]:
+	usage: "/DP (set/add/remove/check) (player) (amount)"
+	trigger:
+		if arg 1 is not set:
+			send "사용법 : /DP (set/add/remove/check) (player) (amount)" to player
+
+		if arg 1 is "set":
+			if arg 2 or arg 3 is not set:
+				send "플레이어 또는 설정할 값을 정해주세요!" to player
+			else:
+				set {DP::%arg 2's uuid%} to arg 3
+				send "%arg 2% 의 기부포인트를 %arg 3%으로 설정했습니다." to player
+
+		else if arg 1 is "add":
+			if arg 2 or arg 3 is not set:
+				send "플레이어 또는 설정할 값을 정해주세요!" to player
+			else:
+				add arg 3 to {DP::%arg 2's uuid%}
+				send "%arg 2% 의 기부포인트에 %arg 3% DP을 추가했습니다." to player
+
+		else if arg 1 is "remove":
+			if arg 2 or arg 3 is not set:
+				send "플레이어 또는 설정할 값을 정해주세요!" to player
+			else:
+				remove arg 3 from {DP::%arg 2's uuid%}
+				if {DP::%arg 2's uuid%} < 0:
+					set {DP::%arg 2's uuid%} to 0
+				send "%arg 2% 의 기부포인트에 %arg 3% DP을 제거했습니다." to player
+
+		else if arg 1 is "check":
+			if arg 2 is not set:
+				send "플레이어를 정해주세요!" to player
+
+			else:
+				if arg 3 is set:
+					send "해당 명령어는 값을 입력하실 필요가 없습니다." to player
+				else:
+					send "%arg 2%의 기부포인트 잔액은 %{DP::%arg 2's uuid%}% DP 입니다."

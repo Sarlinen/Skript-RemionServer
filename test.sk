@@ -1,0 +1,29 @@
+command /test:
+	trigger:
+		if player is op:
+			set {_item} to netherite sword with nbt from "{""max_damage"":1000,""damage"":1,""repair_cost"":999,""custom_model_data"":1}"
+			
+			chance of 90%:
+				set {_amount} to random integer between 1 and 20
+				add "ATspeed + %{_amount}%%%" to lore of {_item}
+				set {_amount} to ({_amount}/100)
+				apply attribute modifier to {_item}:
+					attribute: attack speed
+					id: "attackspeed"
+					slot: mainhand_slot_group
+					amount: {_amount}
+					operation: add_scalar
+			
+			chance of 90%:
+				set {_amount} to random integer between 1 and 4
+				add "ATK + %{_amount}%" to lore of {_item}
+				set {_amount} to {_amount} + 7
+				apply attribute modifier to {_item}:
+					attribute: attack damage
+					id: "attackdamage"
+					slot: mainhand_slot_group
+					amount: {_amount}
+					operation: add_number
+
+
+			give player 1 of {_item}
