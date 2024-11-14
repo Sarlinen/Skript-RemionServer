@@ -3,8 +3,8 @@ on join:
 		set {DP::%player's uuid%} to 0
 
 # 기부 포인트 명령어
-command /DP [<text>] [<player>] [<integer>]:
-	usage: "/DP (set/add/remove/check) (player) (amount)"
+command /dp [<text>] [<player>] [<integer>]:
+	usage: "/dp (set/add/remove/check) (player) (amount)"
 	trigger:
 		if arg 1 is not set:
 			send "사용법 : /DP (set/add/remove/check) (player) (amount)" to player
