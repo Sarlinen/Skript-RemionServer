@@ -34,7 +34,7 @@ command /DP [<text>] [<player>] [<integer>]:
 
 		else if arg 1 is "check":
 			if arg 2 is not set:
-				send "플레이어를 정해주세요!" to player
+				send "현재 기부포인트 잔액은 %{DP::%player's uuid%}% DP 입니다."
 
 			else:
 				if arg 3 is set:
