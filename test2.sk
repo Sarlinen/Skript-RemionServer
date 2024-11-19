@@ -15,58 +15,36 @@ on inventory click:
 	name of event-inventory is "셋홈"
 	cancel event
 	event-inventory is not player's inventory
-	if clicked slot is 1:
-		if now >= {sethome1::%player's uuid%.reuselocation} or {sethome1::%player's uuid%.location} is not set:
+	if clicked slot is 1: #셋홈 1번 지정 (지정비용 : 무료, 쿨타임: 2주)
+		set {_diff} to differnece between {sethome1::%player's uuid%.reuselocation} and now
+		if {sethome1::%player's uuid%.location} is not set or {_diff} >= 2 weeks:
 			set {sethome1::%player's uuid%.location} to location of player
 			set {sethome1::%player's uuid%.reuselocation} to now + 2 weeks
 			send "위치가 셋홈 1번에 저장되었습니다. 다음 지정 가능 시간은 %{sethome1::%player's uuid%.reuselocation}% 이후입니다." to player
 		else:
-			send "위치 지정에 실패했습니다. 지정 가능 시간은 %{sethome1::%player's uuid%.reuselocation}% 이후입니다." to player
+			send "위치 지정에 실패했습니다. 다음 지정 가능 시간은 %{_diff}% 이후입니다." to player
 			
-	else if clicked slot is 4:
+	else if clicked slot is 4: #셋홈 1번 이동 (비용 : 무료, 쿨타임: 1시간)
+		set {_diff} to differnece between {sethome1::%player's uuid%.reusewarp} and now
 		if {sethome1::%player's uuid%.location} is not set:
 			send "셋홈 위치가 지정이 되어있지 않습니다." to player
-		else if now >={sethome1::%player's uuid%.reusemove} or {sethome1::%player's uuid%.reusemove} is not set:
+		else if {sethome1::%player's uuid%.reusewarp} is not set or {_diff} >= 1 hour:
 			teleport player to {sethome1::%player's uuid%.location}
-			send "%{sethome1::%player's uuid%.location}% 로 순간이동 하였습니다" to player
+			send "1번에 지정된 위치인 %{sethome1::%player's uuid%.location}% 로 순간이동 하였습니다" to player
+			set {sethome1::%player's uuid%.reusewarp} to now + 1 hour
 		else:
-			send "위치 지정에 실패했습니다. 이동 가능 시간은 %{sethome1::%player's uuid%.reusemove}% 이후입니다." to player
+			send "위치 지정에 실패했습니다. 다음 이동 가능 시간은 %{_diff}% 이후입니다." to player
+
 	else if clicked slot is 7:
 		send "You clicked on slot 7"
-		
 	else if clicked slot is 10:
-		if {DP::%player's uuid%} >= 3000:
-			if now >= {sethome2::%player's uuid%.reuselocation} or {sethome2::%player's uuid%.location} is not set:
-				subtract 3000 from {DP::%player's uuid%}
-				set {sethome2::%player's uuid%.location} to location of player
-				set {sethome2::%player's uuid%.reuselocation} to now + 2 weeks
-				send "위치가 셋홈 2번에 저장되었습니다. 다음 지정 가능 시간은 %{sethome2::%player's uuid%.reuselocation}% 이후입니다." to player
-			else:
-				send "위치 지정에 실패했습니다. 지정 가능 시간은 %{sethome2::%player's uuid%.reuselocation}% 이후입니다." to player
-		else:
-			send "위치 지정에 실패하였습니다. 필요한 기부 포인트는 3000 포인트입니다."
-			
+		end "You clicked on slot 10"
 	else if clicked slot is 13:
 		send "You clicked on slot 13"
 	else if clicked slot is 16:
 		send "You clicked on slot 16"
 	else if clicked slot is 19:
-		if {DP::%player's uuid%} >= 6000:
-			if now >= {sethome3::%player's uuid%.reuselocation} or {sethome3::%player's uuid%.location} is not set:
-				subtract 6000 from {DP::%player's uuid%}
-				set {sethome3::%player's uuid%.location} to location of player
-				set {sethome3::%player's uuid%.reuselocation} to now + 2 weeks
-				send "위치가 셋홈 3번에 저장되었습니다. 다음 지정 가능 시간은 %{sethome3::%player's uuid%.reuselocation}% 이후입니다." to player
-			else:
-				send "위치 지정에 실패했습니다. 지정 가능 시간은 %{sethome3::%player's uuid%.reuselocation}% 이후입니다." to player
-		else:
-			send "위치 지정에 실패하였습니다. 필요한 기부 포인트는 6000 포인트입니다."
-			
-	else if clicked slot is 22:
-		send "You clicked on slot 22"
-	else if clicked slot is 25:
-		send "You clicked on slot 25"
-
+		send "You clicked on slot 19"
 command /sethome:
 	trigger:
 		Sethome_GUI(player)
