@@ -33,10 +33,15 @@ on inventory click:
 			send "1번에 지정된 위치인 %{sethome1::%player's uuid%.location}% 로 순간이동 하였습니다" to player
 			set {sethome1::%player's uuid%.reusewarp} to now + 1 hour
 		else:
-			send "위치 지정에 실패했습니다. 다음 이동 가능 시간은 %{_diff}% 이후입니다." to player
+			send "이동에 실패했습니다. 쿨타임이 %{_diff}% 만큼 남았습니다." to player
 
-	else if clicked slot is 7:
-		send "You clicked on slot 7"
+	else if clicked slot is 7: #셋홈 1번 이동 (비용 : 1500P, 쿨타임: 없음)
+		if {DP::%player's uuid%} >= 1500:
+			teleport player to {sethome1::%player's uuid%.location}
+			send "1번에 지정된 위치인 %{sethome1::%player's uuid%.location}% 로 순간이동 하였습니다" to player
+		else:
+			send "기부 포인트가 부족합니다. 1500 DP가 필요합니다" to player
+
 	else if clicked slot is 10:
 		end "You clicked on slot 10"
 	else if clicked slot is 13:
