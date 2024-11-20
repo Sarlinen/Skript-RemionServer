@@ -111,7 +111,7 @@ command /sethome:
 	trigger:
 		Sethome_GUI(player)
 
-command /delsethome:
+command /delallsethome:
 	permission: remion.sethome
 	trigger:
 		delete {sethome1::*}
