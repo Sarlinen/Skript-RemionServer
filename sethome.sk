@@ -110,3 +110,10 @@ on inventory click:
 command /sethome:
 	trigger:
 		Sethome_GUI(player)
+
+command /delsethome:
+	permission: remion.sethome
+	trigger:
+		delete {sethome1::*}
+		delete {sethome2::*}
+		delete {sethome3::*}
