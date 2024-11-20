@@ -2,13 +2,13 @@ function Sethome_GUI(p: player):
 	set {_gui} to chest inventory with 3 rows named "셋홈"
 	set slot 1 of {_gui} to white candle named "셋홈 지정 1번" with lore "셋홈 지역을 지정합니다." and "가격 : 무료" and "쿨타임 : 2주"
 	set slot 4 of {_gui} to paper named "무료이동" with lore "쿨타임 : 1시간"
-	set slot 7 of {_gui} to emerald named "유료이동" with lore "500 DP를 사용해 쿨타임을 무시하고 이동합니다."
-	set slot 10 of {_gui} to light blue candle named "셋홈 지정 2번" with lore "셋홈 지역을 지정합니다." and "가격 : 3000 DP" and "쿨타임 : 2주"
+	set slot 7 of {_gui} to emerald named "유료이동" with lore "1000 DP를 사용해 쿨타임을 무시하고 이동합니다."
+	set slot 10 of {_gui} to light blue candle named "셋홈 지정 2번" with lore "셋홈 지역을 지정합니다." and "가격 : 5000 DP" and "쿨타임 : 2주"
 	set slot 13 of {_gui} to paper named "무료이동" with lore "쿨타임 : 3시간"
-	set slot 16 of {_gui} to emerald named "유료이동" with lore "1500 DP를 사용해 쿨타임을 무시하고 이동합니다."
-	set slot 19 of {_gui} to lime candle named "셋홈 지정 3번" with lore "셋홈 지역을 지정합니다." and "가격 : 6000 DP" and "쿨타임 : 2주"
-	set slot 22 of {_gui} to paper named "무료이동" with lore "쿨타임 : 5시간"
-	set slot 25 of {_gui} to emerald named "유료이동" with lore "3000 DP를 사용해 쿨타임을 무시하고 이동합니다."
+	set slot 16 of {_gui} to emerald named "유료이동" with lore "3000 DP를 사용해 쿨타임을 무시하고 이동합니다."
+	set slot 19 of {_gui} to lime candle named "셋홈 지정 3번" with lore "셋홈 지역을 지정합니다." and "가격 : 10000 DP" and "쿨타임 : 2주"
+	set slot 22 of {_gui} to paper named "무료이동" with lore "쿨타임 : 7시간"
+	set slot 25 of {_gui} to emerald named "유료이동" with lore "5000 DP를 사용해 쿨타임을 무시하고 이동합니다."
 	open {_gui} to {_p}
 
 on inventory click:
@@ -35,19 +35,19 @@ on inventory click:
 		else:
 			send "이동에 실패했습니다. 쿨타임이 %{_diff}% 만큼 남았습니다." to player
 
-	else if clicked slot is 7: #셋홈 1번 이동 (비용 : 1500P, 쿨타임: 없음)
-		if {DP::%player's uuid%} >= 1500:
-			subtract 1500 from {DP::%player's uuid%}
+	else if clicked slot is 7: #셋홈 1번 이동 (비용 : 1000P, 쿨타임: 없음)
+		if {DP::%player's uuid%} >= 1000:
+			subtract 1000 from {DP::%player's uuid%}
 			teleport player to {sethome1::%player's uuid%.location}
 			send "1번에 지정된 위치인 %{sethome1::%player's uuid%.location}% 로 순간이동 하였습니다" to player
 		else:
-			send "기부 포인트가 부족합니다. 1500 DP가 필요합니다" to player
+			send "기부 포인트가 부족합니다. 1000 DP가 필요합니다" to player
 
-	else if clicked slot is 10: #셋홈 2번 지정 (지정비용 : 3500 DP, 쿨타임: 2주)
+	else if clicked slot is 10: #셋홈 2번 지정 (지정비용 : 5000 DP, 쿨타임: 2주)
 		set {_diff} to differnece between {sethome1::%player's uuid%.reuselocation} and now
-		if {sethome1::%player's uuid%.location} is not set or {_diff} >= 2 weeks:
-			if {DP::%player's uuid%} >= 3500:
-				subtract 3500 from {DP::%player's uuid%}
+		if {sethome2::%player's uuid%.location} is not set or {_diff} >= 2 weeks:
+			if {DP::%player's uuid%} >= 5000:
+				subtract 5000 from {DP::%player's uuid%}
 				set {sethome2::%player's uuid%.location} to location of player
 				set {sethome2::%player's uuid%.reuselocation} to now + 2 weeks
 				send "위치가 셋홈 2번에 저장되었습니다. 다음 지정 가능 시간은 %{sethome2::%player's uuid%.reuselocation}% 이후입니다." to player
@@ -56,12 +56,57 @@ on inventory click:
 		else:
 			send "위치 지정에 실패했습니다. 다음 지정 가능 시간은 %{_diff}% 이후입니다." to player
 
-	else if clicked slot is 13:
-		send "You clicked on slot 13"
-	else if clicked slot is 16:
-		send "You clicked on slot 16"
-	else if clicked slot is 19:
-		send "You clicked on slot 19"
+	else if clicked slot is 13: #셋홈 2번 이동 (비용 : 무료, 쿨타임: 3시간)
+		set {_diff} to differnece between {sethome2::%player's uuid%.reusewarp} and now
+		if {sethome2::%player's uuid%.location} is not set:
+			send "셋홈 위치가 지정이 되어있지 않습니다." to player
+		else if {sethome2::%player's uuid%.reusewarp} is not set or {_diff} >= 3 hour:
+			teleport player to {sethome2::%player's uuid%.location}
+			send "2번에 지정된 위치인 %{sethome2::%player's uuid%.location}% 로 순간이동 하였습니다" to player
+			set {sethome2::%player's uuid%.reusewarp} to now + 3 hour
+		else:
+			send "이동에 실패했습니다. 쿨타임이 %{_diff}% 만큼 남았습니다." to player
+
+	else if clicked slot is 16: #셋홈 2번 이동 (비용 : 3000 DP, 쿨타임: 없음)
+		if {DP::%player's uuid%} >= 3000:
+			subtract 3000 from {DP::%player's uuid%}
+			teleport player to {sethome2::%player's uuid%.location}
+			send "2번에 지정된 위치인 %{sethome2::%player's uuid%.location}% 로 순간이동 하였습니다" to player
+		else:
+			send "기부 포인트가 부족합니다. 3000 DP가 필요합니다" to player
+
+	else if clicked slot is 19:  #셋홈 3번 지정 (지정비용 : 10000 DP, 쿨타임: 2주)
+		set {_diff} to differnece between {sethome1::%player's uuid%.reuselocation} and now
+		if {sethome3::%player's uuid%.location} is not set or {_diff} >= 2 weeks:
+			if {DP::%player's uuid%} >= 10000:
+				subtract 10000 from {DP::%player's uuid%}
+				set {sethome3::%player's uuid%.location} to location of player
+				set {sethome3::%player's uuid%.reuselocation} to now + 2 weeks
+				send "위치가 셋홈 3번에 저장되었습니다. 다음 지정 가능 시간은 %{sethome3::%player's uuid%.reuselocation}% 이후입니다." to player
+			else:
+				send "기부 포인트가 부족합니다. 10000 DP가 필요합니다" to player
+		else:
+			send "위치 지정에 실패했습니다. 다음 지정 가능 시간은 %{_diff}% 이후입니다." to player
+
+	else if clicked slot is 22: #셋홈 3번 이동 (비용 : 무료, 쿨타임: 7시간)
+		set {_diff} to differnece between {sethome3::%player's uuid%.reusewarp} and now
+		if {sethome3::%player's uuid%.location} is not set:
+			send "셋홈 위치가 지정이 되어있지 않습니다." to player
+		else if {sethome3::%player's uuid%.reusewarp} is not set or {_diff} >= 7 hour:
+			teleport player to {sethome3::%player's uuid%.location}
+			send "2번에 지정된 위치인 %{sethome3::%player's uuid%.location}% 로 순간이동 하였습니다" to player
+			set {sethome3::%player's uuid%.reusewarp} to now + 7 hour
+		else:
+			send "이동에 실패했습니다. 쿨타임이 %{_diff}% 만큼 남았습니다." to player
+
+	else if clicked slot is 25:
+		if {DP::%player's uuid%} >= 5000:
+			subtract 5000 from {DP::%player's uuid%}
+			teleport player to {sethome3::%player's uuid%.location}
+			send "3번에 지정된 위치인 %{sethome3::%player's uuid%.location}% 로 순간이동 하였습니다" to player
+		else:
+			send "기부 포인트가 부족합니다. 5000 DP가 필요합니다" to player
+
 command /sethome:
 	trigger:
 		Sethome_GUI(player)
