@@ -37,13 +37,25 @@ on inventory click:
 
 	else if clicked slot is 7: #셋홈 1번 이동 (비용 : 1500P, 쿨타임: 없음)
 		if {DP::%player's uuid%} >= 1500:
+			subtract 1500 from {DP::%player's uuid%}
 			teleport player to {sethome1::%player's uuid%.location}
 			send "1번에 지정된 위치인 %{sethome1::%player's uuid%.location}% 로 순간이동 하였습니다" to player
 		else:
 			send "기부 포인트가 부족합니다. 1500 DP가 필요합니다" to player
 
-	else if clicked slot is 10:
-		end "You clicked on slot 10"
+	else if clicked slot is 10: #셋홈 2번 지정 (지정비용 : 3500 DP, 쿨타임: 2주)
+		set {_diff} to differnece between {sethome1::%player's uuid%.reuselocation} and now
+		if {sethome1::%player's uuid%.location} is not set or {_diff} >= 2 weeks:
+			if {DP::%player's uuid%} >= 3500:
+				subtract 3500 from {DP::%player's uuid%}
+				set {sethome2::%player's uuid%.location} to location of player
+				set {sethome2::%player's uuid%.reuselocation} to now + 2 weeks
+				send "위치가 셋홈 2번에 저장되었습니다. 다음 지정 가능 시간은 %{sethome2::%player's uuid%.reuselocation}% 이후입니다." to player
+			else:
+				send "기부 포인트가 부족합니다. 3500 DP가 필요합니다" to player
+		else:
+			send "위치 지정에 실패했습니다. 다음 지정 가능 시간은 %{_diff}% 이후입니다." to player
+
 	else if clicked slot is 13:
 		send "You clicked on slot 13"
 	else if clicked slot is 16:
