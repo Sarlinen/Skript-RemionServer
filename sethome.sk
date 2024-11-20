@@ -16,7 +16,7 @@ on inventory click:
 	cancel event
 	event-inventory is not player's inventory
 	if clicked slot is 1: #셋홈 1번 지정 (지정비용 : 무료, 쿨타임: 2주)
-		set {_diff} to differnece between {sethome1::%player's uuid%.reuselocation} and now
+		set {_diff} to difference between {sethome1::%player's uuid%.reuselocation} and now
 		if {sethome1::%player's uuid%.location} is not set or {_diff} >= 2 weeks:
 			set {sethome1::%player's uuid%.location} to location of player
 			set {sethome1::%player's uuid%.reuselocation} to now + 2 weeks
@@ -25,7 +25,7 @@ on inventory click:
 			send "위치 지정에 실패했습니다. 다음 지정 가능 시간은 %{_diff}% 이후입니다." to player
 			
 	else if clicked slot is 4: #셋홈 1번 이동 (비용 : 무료, 쿨타임: 1시간)
-		set {_diff} to differnece between {sethome1::%player's uuid%.reusewarp} and now
+		set {_diff} to difference between {sethome1::%player's uuid%.reusewarp} and now
 		if {sethome1::%player's uuid%.location} is not set:
 			send "셋홈 위치가 지정이 되어있지 않습니다." to player
 		else if {sethome1::%player's uuid%.reusewarp} is not set or {_diff} >= 1 hour:
@@ -44,7 +44,7 @@ on inventory click:
 			send "기부 포인트가 부족합니다. 1000 DP가 필요합니다" to player
 
 	else if clicked slot is 10: #셋홈 2번 지정 (지정비용 : 5000 DP, 쿨타임: 2주)
-		set {_diff} to differnece between {sethome1::%player's uuid%.reuselocation} and now
+		set {_diff} to difference between {sethome1::%player's uuid%.reuselocation} and now
 		if {sethome2::%player's uuid%.location} is not set or {_diff} >= 2 weeks:
 			if {DP::%player's uuid%} >= 5000:
 				subtract 5000 from {DP::%player's uuid%}
@@ -52,12 +52,12 @@ on inventory click:
 				set {sethome2::%player's uuid%.reuselocation} to now + 2 weeks
 				send "위치가 셋홈 2번에 저장되었습니다. 다음 지정 가능 시간은 %{sethome2::%player's uuid%.reuselocation}% 이후입니다." to player
 			else:
-				send "기부 포인트가 부족합니다. 3500 DP가 필요합니다" to player
+				send "기부 포인트가 부족합니다. 5000 DP가 필요합니다" to player
 		else:
 			send "위치 지정에 실패했습니다. 다음 지정 가능 시간은 %{_diff}% 이후입니다." to player
 
 	else if clicked slot is 13: #셋홈 2번 이동 (비용 : 무료, 쿨타임: 3시간)
-		set {_diff} to differnece between {sethome2::%player's uuid%.reusewarp} and now
+		set {_diff} to difference between {sethome2::%player's uuid%.reusewarp} and now
 		if {sethome2::%player's uuid%.location} is not set:
 			send "셋홈 위치가 지정이 되어있지 않습니다." to player
 		else if {sethome2::%player's uuid%.reusewarp} is not set or {_diff} >= 3 hour:
@@ -76,7 +76,7 @@ on inventory click:
 			send "기부 포인트가 부족합니다. 3000 DP가 필요합니다" to player
 
 	else if clicked slot is 19:  #셋홈 3번 지정 (지정비용 : 10000 DP, 쿨타임: 2주)
-		set {_diff} to differnece between {sethome1::%player's uuid%.reuselocation} and now
+		set {_diff} to difference between {sethome1::%player's uuid%.reuselocation} and now
 		if {sethome3::%player's uuid%.location} is not set or {_diff} >= 2 weeks:
 			if {DP::%player's uuid%} >= 10000:
 				subtract 10000 from {DP::%player's uuid%}
@@ -89,7 +89,7 @@ on inventory click:
 			send "위치 지정에 실패했습니다. 다음 지정 가능 시간은 %{_diff}% 이후입니다." to player
 
 	else if clicked slot is 22: #셋홈 3번 이동 (비용 : 무료, 쿨타임: 7시간)
-		set {_diff} to differnece between {sethome3::%player's uuid%.reusewarp} and now
+		set {_diff} to difference between {sethome3::%player's uuid%.reusewarp} and now
 		if {sethome3::%player's uuid%.location} is not set:
 			send "셋홈 위치가 지정이 되어있지 않습니다." to player
 		else if {sethome3::%player's uuid%.reusewarp} is not set or {_diff} >= 7 hour:
