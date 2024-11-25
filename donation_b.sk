@@ -1,4 +1,1 @@
-on tab completer for "/dp":
-        set {_c::*} to "set", "add", "remove" and "check"
-        loop {_c::*}:
-                add loop-value to completions
+
