@@ -3,7 +3,7 @@
 #min/maxamount = 최소/최대값
 #baseamount = 기본값
 
-#예제 : set {_i} to addAttackDamageModifier({_i}, 2, 5, 10) = Item에 Attack Damage를 2 ~ 5를 추가한다. 해당 아이템의 기본 값은 10
+#예제 : addAttackDamageModifier({_i}, 2, 5, 10) = Item에 Attack Damage를 2 ~ 5를 추가한다. 해당 아이템의 기본 값은 10
 
 function AttackDamageModifier(item: item, minamount: number, maxamount: number, baseamount: number):
     set {_randomAmount} to random integer between {_minamount} and {_maxamount}
@@ -20,6 +20,7 @@ function AttackDamageModifier(item: item, minamount: number, maxamount: number, 
 #Attribute Funciton (Attack Speed) - 적용 : 검, 도끼
 #item = 적용할 아이템
 #min/maxamount = 최소/최대값
+#예제 : AttackSpeedModifier(({_i}, 5, 15) = Item에 Attack Speed를 2% ~ 5% 추가한다.
 
 function AttackSpeedModifier(item: item, minamount: number, maxamount: number):
     set {_randomAmount} to random integer between {_minamount} and {_maxamount}
