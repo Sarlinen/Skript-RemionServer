@@ -1,4 +1,4 @@
-#Attribute Funciton (Attack Damage)
+#Attribute Funciton (Attack Damage) - 적용 : 검, 도끼
 #item = 적용할 아이템
 #min/maxamount = 최소/최대값
 #baseamount = 기본값
@@ -17,7 +17,21 @@ function AttackDamageModifier(item: item, minamount: number, maxamount: number, 
         operation: add_number
     return {_item}
 
+#Attribute Funciton (Attack Speed) - 적용 : 검, 도끼
+#item = 적용할 아이템
+#min/maxamount = 최소/최대값
 
+function AttackSpeedModifier(item: item, minamount: number, maxamount: number):
+    set {_randomAmount} to random integer between {_minamount} and {_maxamount}
+    add "DLY - %{_randomAmount}%%%" to lore of {_item}
+    set {_scaledAmount} to {_randomAmount} / 100
+    apply attribute modifier to {_item}:
+        attribute: attack speed
+        id: "attackspeed"
+        slot: mainhand_slot_group
+        amount: {_scaledAmount}
+        operation: add_scalar
+    return {_item}
 
 
 command /test:
