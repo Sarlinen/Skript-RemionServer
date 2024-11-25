@@ -19,6 +19,7 @@ on break of wheat plant or carrot plant or potato plant or beetroot plant:
 				if player has permission "remion.additionalplant":
 					set {_additionalplant} to random integer between 0 and 2
 					drop {_additionalplant} of carrot
+
 		if event-block is potato plant:
 			if player has potato:
 				wait 1 tick
@@ -28,6 +29,7 @@ on break of wheat plant or carrot plant or potato plant or beetroot plant:
 				if player has permission "remion.additionalplant":
 					set {_additionalplant} to random integer between 0 and 2
 					drop {_additionalplant} of potato
+
 		if event-block is beetroot plant:
 			if player has beetroot seeds:
 				wait 1 tick
