@@ -37,7 +37,8 @@ function AttackSpeedModifier(item: item, minamount: number, maxamount: number):
 command /test:
 	trigger:
 		if player is op:
-			set {_item} to netherite sword with nbt from "{""max_damage"":1000,""damage"":1,""repair_cost"":999,""custom_model_data"":1}"
+			set {_item} to netherite sword with nbt from "{""max_damage"":10155,""damage"":0,""repair_cost"":999,""custom_model_data"":1,""custom_data""={""tag:skinitem""}}"
+			 add "" to lore of {_item}
 			
 			chance of 90%:
 				addAttackDamageModifier({_item}, 1, 10, 8) #네더라이트 검의 데미지는 8
