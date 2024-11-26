@@ -20,7 +20,7 @@ function AttackDamageModifier(item: item, minamount: number, maxamount: number, 
 #Attribute Funciton (Attack Speed) - 적용 : 검, 도끼
 #item = 적용할 아이템
 #min/maxamount = 최소/최대값
-#예제 : AttackSpeedModifier(({_i}, 5, 15) = Item에 Attack Speed를 2% ~ 5% 추가한다.
+#예제 : AttackSpeedModifier(({_i}, 2, 5) = Item에 Attack Speed를 2% ~ 5% 추가한다.
 
 function AttackSpeedModifier(item: item, minamount: number, maxamount: number):
     set {_randomAmount} to random integer between {_minamount} and {_maxamount}
