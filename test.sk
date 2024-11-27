@@ -65,7 +65,7 @@ function ArmorToughnessAttributeModifier(item: item, minamount: integer, maxamou
 	
 	
 
-command /test:
+command /test2:
 	trigger:
 		if player is op:
 			set {_item} to netherite sword with nbt from "{""max_damage"":10155,""damage"":0,""repair_cost"":999,""custom_model_data"":1,""custom_data""={""tag:skinitem""}}"
