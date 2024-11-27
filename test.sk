@@ -2,7 +2,7 @@
 #item = 적용할 아이템
 #min/maxamount = 최소/최대값
 #baseamount = 기본값
-#예제 : addAttackDamageModifier({_i}, 2, 5, 10) = Item에 Attack Damage를 2 ~ 5를 추가한다. 해당 아이템의 기본 값은 10
+#예제 : addAttackDamageModifier({_item}, 2, 5, 10) = {_item}에 Attack Damage를 2 ~ 5를 추가한다. 해당 아이템의 기본 값은 10
 
 function AttackDamageModifier(item: item, minamount: integer, maxamount: integer, baseamount: integer):
 	set {_randomAmount} to random integer between {_minamount} and {_maxamount}
@@ -19,7 +19,7 @@ function AttackDamageModifier(item: item, minamount: integer, maxamount: integer
 #Attribute Funciton (Attack Speed) - 적용 : 검, 도끼
 #item = 적용할 아이템
 #min/maxamount = 최소/최대값
-#예제 : AttackSpeedModifier(({_i}, 2, 5) = Item에 Attack Speed를 2% ~ 5% 추가한다.
+#예제 : AttackSpeedModifier(({_item}, 2, 5) = {_item}에 Attack Speed를 2% ~ 5% 추가한다.
 
 function AttackSpeedModifier(item: item, minamount: integer, maxamount: integer):
 	set {_randomAmount} to random integer between {_minamount} and {_maxamount}
@@ -36,7 +36,7 @@ function AttackSpeedModifier(item: item, minamount: integer, maxamount: integer)
 #Attribute Funciton (MaxHealth) - 적용 : 갑옷, 방패
 #item = 적용할 아이템
 #min/maxamount = 최소/최대값
-#예제 : MaxHealthAttributeModifier(({_i}, 2, 5, "head_slot_group") = Item을 "head_slot_group"에 착용했을 때 maxHealth를 2 ~ 5 추가한다.
+#예제 : MaxHealthAttributeModifier(({_item}, 2, 5, "head_slot_group") = {_item}을 "head_slot_group"에 착용했을 때 maxHealth를 2 ~ 5 추가한다.
 function MaxHealthAttributeModifier(item: item, minamount: integer, maxamount: integer, slotGroup: string):
 	set {_randomAmount} to random integer between {_minamount} and {_maxamount}
 	add "MaxHealth + %{_randomAmount}%" to lore of {_item}
@@ -52,7 +52,7 @@ function MaxHealthAttributeModifier(item: item, minamount: integer, maxamount: i
 #Attribute Funciton (MaxHealth) - 적용 : 갑옷
 #item = 적용할 아이템
 #min/maxamount = 최소/최대값
-#예제 : ArmorToughnessAttributeModifier(({_i}, 2, 5, "head_slot_group") = Item을 "head_slot_group"에 착용했을 때 ArmorToughness를 2 ~ 5 추가한다.
+#예제 : ArmorToughnessAttributeModifier(({_item}, 2, 5, "head_slot_group") = {_item}을 "head_slot_group"에 착용했을 때 ArmorToughness를 2 ~ 5 추가한다.
 function ArmorToughnessAttributeModifier(item: item, minamount: integer, maxamount: integer, slotGroup: string):
 	set {_randomAmount} to random integer between {_minamount} and {_maxamount}
 	add "Armor Toughness + %{_randomAmount}" to lore of {_item}
@@ -72,18 +72,10 @@ command /test:
 			 add "" to lore of {_item}
 			
 			chance of 90%:
-				addAttackDamageModifier({_item}, 1, 10, 8) #네더라이트 검의 데미지는 8
+				AttackDamageModifier({_item}, 1, 10, 8) #네더라이트 검의 데미지는 8
 			
 			chance of 90%:
-				set {_amount} to random integer between 1 and 4
-				add "ATK + %{_amount}%" to lore of {_item}
-				set {_amount} to {_amount} + 7
-				apply attribute modifier to {_item}:
-					attribute: attack damage
-					id: "attackdamage"
-					slot: mainhand_slot_group
-					amount: {_amount}
-					operation: add_integer
+				AttackSpeedModifier(({_item}, 1, 20)
 
 
 			give player 1 of {_item}
