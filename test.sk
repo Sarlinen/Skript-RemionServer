@@ -1,1 +1,77 @@
+#Attribute Funciton (Attack Damage) - 적용 : 검, 도끼
+#item = 적용할 아이템
+#min/maxamount = 최소/최대값
+#baseamount = 기본값
+#예제 : set {_item} to AttackDamageModifier({_item}, 2, 5, 10) = {_item}에 Attack Damage를 2 ~ 5를 추가한다. 해당 아이템의 기본 값은 10
+	
+function AttackDamageModifier(item: item, minamount: integer, maxamount: integer, baseamount: integer) :: item:
+	set {_randomAmount} to random integer between {_minamount} and {_maxamount}
+	add "&6➤ &cATK &7+&a%{_randomAmount}%" to lore of {_item}
+	set {_finalAmount} to {_randomAmount} + {_baseamount} - 1
+	apply attribute modifier to {_item}:
+		attribute: attack damage
+		id: "attackdamage"
+		slot: mainhand_slot_group
+		amount: {_finalAmount}
+		operation: add_number
+	return {_item}
 
+#Attribute Funciton (Attack Speed) - 적용 : 검, 도끼
+#item = 적용할 아이템
+#min/maxamount = 최소/최대값
+#예제 : set {_item} to AttackSpeedModifier(({_item}, 2, 5) = {_item}에 Attack Speed를 2% ~ 5% 추가한다.
+
+function AttackSpeedModifier(item: item, minamount: integer, maxamount: integer) :: item:
+	set {_randomAmount} to random integer between {_minamount} and {_maxamount}
+	add "&6➤ &cDLY &7-&a%{_randomAmount}%%%" to lore of {_item}
+	set {_scaledAmount} to {_randomAmount} / 100
+	apply attribute modifier to {_item}:
+		attribute: attack speed
+		id: "attackspeed"
+		slot: mainhand_slot_group
+		amount: {_scaledAmount}
+		operation: add_scalar
+	return {_item}
+
+#Attribute Funciton (MaxHealth) - 적용 : 갑옷, 방패
+#item = 적용할 아이템
+#min/maxamount = 최소/최대값
+#예제 : set {_item} to MaxHealthAttributeModifier({_item}, 2, 5, "head_slot_group") = {_item}을 "head_slot_group"에 착용했을 때 maxHealth를 2 ~ 5 추가한다.
+function MaxHealthAttributeModifier(item: item, minamount: integer, maxamount: integer, slotGroup: string) :: item:
+	set {_randomAmount} to random integer between {_minamount} and {_maxamount}
+	add "MaxHealth + %{_randomAmount}%" to lore of {_item}
+	set {_scaledAmount} to {_randomAmount}
+	apply attribute modifier to {_item}:
+		attribute: max health
+		id: "maxhealth"
+		slot: {_slotGroup}
+		amount: {_scaledAmount}
+		operation: add_number
+
+
+#Attribute Funciton (MaxHealth) - 적용 : 갑옷
+#item = 적용할 아이템
+#min/maxamount = 최소/최대값
+#예제 : set {_item} to ArmorToughnessAttributeModifier({_item}, 2, 5, "head_slot_group") = {_item}을 "head_slot_group"에 착용했을 때 ArmorToughness를 2 ~ 5 추가한다.
+function ArmorToughnessAttributeModifier(item: item, minamount: integer, maxamount: integer, slotGroup: string) :: item:
+	set {_randomAmount} to random integer between {_minamount} and {_maxamount}
+	add "Armor Toughness + %{_randomAmount}%" to lore of {_item}
+	apply attribute modifier to {_item}:
+		attribute: armor toughness
+		id: "armortoughness"
+		slot: {_slotGroup}
+		amount: {_randomAmount}
+		operation: add_number
+
+command /test2:
+	trigger:
+		if player is op:
+			set {_item} to netherite sword named "테스트스킨무기"	with nbt from "{""max_damage"":10155,""damage"":1,""repair_cost"":999,""custom_model_data"":1,""show_in_tooltip"":false}"
+			add " " and "&r[ 추가옵션 ]" to lore of {_item}
+
+			set {_item} to AttackDamageModifier({_item}, 1, 10, 8) #네더라이트 검의 기본 데미지는 8
+			set {_item} to AttackSpeedModifier({_item}, 1, 20)
+
+			add hide attributes to item flags of {_item}
+
+			give player 1 of {_item}
