@@ -69,7 +69,7 @@ command /test:
 	trigger:
 		if player is op:
 			set {_item} to netherite sword with nbt from "{""max_damage"":10155,""damage"":0,""repair_cost"":999,""custom_model_data"":1,""custom_data""={""tag:skinitem""}}"
-			 add "" and "&r[ 추가옵션 ]"to lore of {_item}
+			add "" and "&r[ 추가옵션 ]"to lore of {_item}
 			
 			chance of 90%:
 				AttackDamageModifier({_item}, 1, 10, 8) #네더라이트 검의 기본 데미지는 8
