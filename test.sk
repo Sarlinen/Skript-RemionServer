@@ -36,7 +36,7 @@ function AttackSpeedModifier(item: item, minamount: integer, maxamount: integer)
 #Attribute Funciton (MaxHealth) - 적용 : 갑옷, 방패
 #item = 적용할 아이템
 #min/maxamount = 최소/최대값
-#예제 : MaxHealthAttributeModifier(({_item}, 2, 5, "head_slot_group") = {_item}을 "head_slot_group"에 착용했을 때 maxHealth를 2 ~ 5 추가한다.
+#예제 : MaxHealthAttributeModifier({_item}, 2, 5, "head_slot_group") = {_item}을 "head_slot_group"에 착용했을 때 maxHealth를 2 ~ 5 추가한다.
 function MaxHealthAttributeModifier(item: item, minamount: integer, maxamount: integer, slotGroup: string):
 	set {_randomAmount} to random integer between {_minamount} and {_maxamount}
 	add "MaxHealth + %{_randomAmount}%" to lore of {_item}
@@ -52,7 +52,7 @@ function MaxHealthAttributeModifier(item: item, minamount: integer, maxamount: i
 #Attribute Funciton (MaxHealth) - 적용 : 갑옷
 #item = 적용할 아이템
 #min/maxamount = 최소/최대값
-#예제 : ArmorToughnessAttributeModifier(({_item}, 2, 5, "head_slot_group") = {_item}을 "head_slot_group"에 착용했을 때 ArmorToughness를 2 ~ 5 추가한다.
+#예제 : ArmorToughnessAttributeModifier({_item}, 2, 5, "head_slot_group") = {_item}을 "head_slot_group"에 착용했을 때 ArmorToughness를 2 ~ 5 추가한다.
 function ArmorToughnessAttributeModifier(item: item, minamount: integer, maxamount: integer, slotGroup: string):
 	set {_randomAmount} to random integer between {_minamount} and {_maxamount}
 	add "Armor Toughness + %{_randomAmount}%" to lore of {_item}
@@ -69,13 +69,13 @@ command /test:
 	trigger:
 		if player is op:
 			set {_item} to netherite sword with nbt from "{""max_damage"":10155,""damage"":0,""repair_cost"":999,""custom_model_data"":1,""custom_data""={""tag:skinitem""}}"
-			add "" and "&r[ 추가옵션 ]"to lore of {_item}
+			add " " and "&r[ 추가옵션 ]" to lore of {_item}
 			
 			chance of 90%:
 				AttackDamageModifier({_item}, 1, 10, 8) #네더라이트 검의 기본 데미지는 8
 			
 			chance of 90%:
-				AttackSpeedModifier(({_item}, 1, 20)
+				AttackSpeedModifier({_item}, 1, 20)
 
 
 			give player 1 of {_item}
