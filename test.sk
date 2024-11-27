@@ -13,7 +13,7 @@ function AttackDamageModifier(item: item, minamount: integer, maxamount: integer
 		id: "attackdamage"
 		slot: mainhand_slot_group
 		amount: {_finalAmount}
-		operation: add_integer
+		operation: add_number
 	return {_item}
 
 #Attribute Funciton (Attack Speed) - 적용 : 검, 도끼
@@ -46,7 +46,7 @@ function MaxHealthAttributeModifier(item: item, minamount: integer, maxamount: i
 		id: "maxhealth"
 		slot: {_slotGroup}
 		amount: {_scaledAmount}
-		operation: add_integer
+		operation: add_number
 	return {_item}
 
 #Attribute Funciton (MaxHealth) - 적용 : 갑옷
@@ -61,7 +61,7 @@ function ArmorToughnessAttributeModifier(item: item, minamount: integer, maxamou
 		id: "armortoughness-%now%"
 		slot: {_slotGroup}
 		amount: {_randomAmount}
-		operation: add_integer
+		operation: add_number
 	
 	return {_item}
 
