@@ -70,7 +70,7 @@ function ArmorToughnessAttributeModifier(item: item, minamount: integer, maxamou
 #예제 : set {_item} to MovementSpeedAttributeModifier({_item}, 2, 5, "head_slot_group") = {_item}을 "head_slot_group"에 착용했을 때 movement speed를 2 ~ 5% 추가한다.
 function MovementSpeedAttributeModifier(item: item, minamount: integer, maxamount: integer, slotGroup: string) :: item:
 	set {_randomAmount} to random integer between {_minamount} and {_maxamount}
-	add "&6➤ &cDLY &7-&a%{_randomAmount}%%%" to lore of {_item}
+	add "&6➤ &cSPD &7-&a%{_randomAmount}%%%" to lore of {_item}
 	set {_scaledAmount} to {_randomAmount} / 100
 	apply attribute modifier to {_item}:
 		attribute: movement speed
