@@ -47,21 +47,38 @@ function MaxHealthAttributeModifier(item: item, minamount: integer, maxamount: i
 		slot: {_slotGroup}
 		amount: {_scaledAmount}
 		operation: add_number
+	return {_item}
 
-
-#Attribute Funciton (MaxHealth) - 적용 : 갑옷
+#Attribute Funciton (ArmorToughness) - 적용 : 갑옷
 #item = 적용할 아이템
 #min/maxamount = 최소/최대값
 #예제 : set {_item} to ArmorToughnessAttributeModifier({_item}, 2, 5, "head_slot_group") = {_item}을 "head_slot_group"에 착용했을 때 ArmorToughness를 2 ~ 5 추가한다.
 function ArmorToughnessAttributeModifier(item: item, minamount: integer, maxamount: integer, slotGroup: string) :: item:
 	set {_randomAmount} to random integer between {_minamount} and {_maxamount}
-	add "Armor Toughness + %{_randomAmount}%" to lore of {_item}
+	add "AT + %{_randomAmount}%" to lore of {_item}
 	apply attribute modifier to {_item}:
 		attribute: armor toughness
 		id: "armortoughness"
 		slot: {_slotGroup}
 		amount: {_randomAmount}
 		operation: add_number
+	return {_item}
+
+#Attribute Funciton (Movement Speed) - 적용 : 갑옷
+#item = 적용할 아이템
+#min/maxamount = 최소/최대값
+#예제 : set {_item} to MovementSpeedAttributeModifier({_item}, 2, 5, "head_slot_group") = {_item}을 "head_slot_group"에 착용했을 때 movement speed를 2 ~ 5% 추가한다.
+function MovementSpeedAttributeModifier(item: item, minamount: integer, maxamount: integer, slotGroup: string) :: item:
+	set {_randomAmount} to random integer between {_minamount} and {_maxamount}
+	add "&6➤ &cDLY &7-&a%{_randomAmount}%%%" to lore of {_item}
+	set {_scaledAmount} to {_randomAmount} / 100
+	apply attribute modifier to {_item}:
+		attribute: movement speed
+		id: "movementspeed"
+		slot: {_slotGroup}
+		amount: {_scaledAmount}
+		operation: add_scalar
+	return {_item}
 
 command /test2:
 	trigger:
