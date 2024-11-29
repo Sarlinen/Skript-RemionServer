@@ -1,0 +1,25 @@
+on rightclick on enchanting table:
+	if player has permission "remion.use.enchantingtable":
+		stop
+	else:
+		cancel event
+
+on enchant:
+	if the clicked button is enchantment option 1:
+		if level of %player% < 30:
+			cancel event
+		else:
+			reduce the player's level by 29
+			stop
+	if the clicked button is enchantment option 2:
+		if level of %player% < 40:
+			cancel event
+		else:
+			reduce the player's level by 38
+			stop
+	if the clicked button is enchantment option 3:
+		if level of %player% < 50:
+			cancel event
+		else:
+			reduce the player's level by 47
+			stop
