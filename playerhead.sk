@@ -1,3 +1,9 @@
+function 커스텀헤드(player:player):: item:
+   set {_head} to a player head
+   set {_n} to nbt of {_head}
+   add nbt compound of "{""minecraft:profile"":{id:[I;1,1820739582,-1120930980,-1600539797],name:"""",properties:[{name:""textures"",value:""%{_value}%""}]}}" to {_n}
+   return {_head}
+
 command /playerhead [<offline player>]:
 	trigger:
 		if arg 1 is set:
@@ -9,3 +15,4 @@ command /playerhead [<offline player>]:
 				send "&c기부 포인트가 1500 미만입니다." to player
 		else:
 			send "&c머리를 받을 플레이어의 닉네임을 입력해주세요." to player
+
