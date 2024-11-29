@@ -1,7 +1,7 @@
-function 커스텀헤드(player:player):: item:
+function customhead(p:player):: item:
    set {_head} to a player head
    set {_n} to nbt of {_head}
-   add nbt compound of "{""minecraft:profile"":{id:[I;1,1820739582,-1120930980,-1600539797],name:"""",properties:[{name:""textures"",value:""%{_value}%""}]}}" to {_n}
+   add nbt compound of "{""minecraft:profile"":{id:[I;1,1820739582,-1120930980,-1600539797],name:"""",properties:[{name:""textures"",value:""%{_p}%""}]}}" to {_n}
    return {_head}
 
 command /playerhead [<offline player>]:
@@ -10,6 +10,7 @@ command /playerhead [<offline player>]:
 			if {DP::%player's uuid%} >= 1500:
 				remove 1500 from {DP::%player's uuid%}
 				execute console command "/give %player% player_head[profile={name:""%arg 1%""}] 1"
+				give 1 customhead(%arg 1%) to player
 				send "&a%arg 1%님의 머리를 받았습니다!" to player
 			else:
 				send "&c기부 포인트가 1500 미만입니다." to player
