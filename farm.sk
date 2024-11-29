@@ -1,7 +1,7 @@
 on break of fully grown wheat plant or fully grown carrot plant or fully grown potato plant or fully grown beetroot plant:
 	if event-block is wheat plant:
-		if player has seeds:
-			if player has permission "remion.autofarm":
+		if player has permission "remion.autofarm":
+			if player has seeds:
 				wait 1 tick
 				remove 1 seeds from player
 				wait 10 ticks
@@ -12,8 +12,8 @@ on break of fully grown wheat plant or fully grown carrot plant or fully grown p
 					drop {_additionalplant} of wheat
 
 	if event-block is carrot plant:
-		if player has seeds:
-			if player has permission "remion.autofarm":
+		if player has permission "remion.autofarm":
+			if player has carrot:
 				wait 1 tick
 				remove 1 carrots from player
 				wait 10 ticks
@@ -24,8 +24,8 @@ on break of fully grown wheat plant or fully grown carrot plant or fully grown p
 					drop {_additionalplant} of carrot
 
 	if event-block is potato plant:
-		if player has seeds:
-			if player has permission "remion.autofarm":
+		if player has permission "remion.autofarm":
+			if player has potato:
 				wait 1 tick
 				remove 1 potatos from player
 				wait 10 ticks
@@ -36,8 +36,8 @@ on break of fully grown wheat plant or fully grown carrot plant or fully grown p
 					drop {_additionalplant} of potato
 
 	if event-block is bitroot plant:
-		if player has seeds:
-			if player has permission "remion.autofarm":
+		if player has permission "remion.autofarm":
+			if player has bitroot seed:
 				wait 1 tick
 				remove 1 bitroot seeds from player
 				wait 10 ticks
