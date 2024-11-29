@@ -7,9 +7,9 @@ on break of fully grown wheat plant or fully grown carrot plant or fully grown p
 				wait 10 ticks
 				set block to wheat plant
 		if player has permission "remion.additionalplant":
-				chance of 50%:
-					set {_additionalplant} to random integer between 0 and 2
-					drop {_additionalplant} of wheat
+			chance of 50%:
+				set {_additionalplant} to random integer between 0 and 2
+				drop {_additionalplant} of wheat
 
 	if event-block is carrot plant:
 		if player has permission "remion.autofarm":
@@ -19,9 +19,9 @@ on break of fully grown wheat plant or fully grown carrot plant or fully grown p
 				wait 10 ticks
 				set block to carrot plant
 		if player has permission "remion.additionalplant":
-				chance of 50%:
-					set {_additionalplant} to random integer between 0 and 2
-					drop {_additionalplant} of carrot
+			chance of 50%:
+				set {_additionalplant} to random integer between 0 and 2
+				drop {_additionalplant} of carrot
 
 	if event-block is potato plant:
 		if player has permission "remion.autofarm":
@@ -31,9 +31,9 @@ on break of fully grown wheat plant or fully grown carrot plant or fully grown p
 				wait 10 ticks
 				set block to potato plant
 		if player has permission "remion.additionalplant":
-				chance of 50%:
-					set {_additionalplant} to random integer between 0 and 2
-					drop {_additionalplant} of potato
+			chance of 50%:
+				set {_additionalplant} to random integer between 0 and 2
+				drop {_additionalplant} of potato
 
 	if event-block is bitroot plant:
 		if player has permission "remion.autofarm":
@@ -43,6 +43,6 @@ on break of fully grown wheat plant or fully grown carrot plant or fully grown p
 				wait 10 ticks
 				set block to bitroot plant
 		if player has permission "remion.additionalplant":
-				chance of 50%:
-					set {_additionalplant} to random integer between 0 and 2
-					drop {_additionalplant} of bitroot
+			chance of 50%:
+				set {_additionalplant} to random integer between 0 and 2
+				drop {_additionalplant} of bitroot
