@@ -14,7 +14,7 @@ function Skin_Purchase_main(p: player):
 function Sword_Skin_Purchase(p: player):
 	set {_gui} to chest inventory with 1 rows named "검 스킨 구매"
 
-	set slot 0 of {_gui} to netherite sword named "TEST Sword" with lore "테스트 검 스킨" and "가격 : 5000DP" with custom model data 1
+	set slot 0 of {_gui} to netherite sword named "TEST Sword" with lore "테스트 검 스킨" and "가격 : 5000DP" and "내구도 : 10155" and "[추가 옵션 목록]" and "&6➤ DLY (50%%)" and "&6➤ ATK (50%%)" with custom model data 1
 	open {_gui} to {_p}
 
 # ---------------------------- Attribute Function ---------------------------------
@@ -125,15 +125,17 @@ on inventory click:
 	event-inventory is not player's inventory
 	if clicked slot is 0:
 		if {DP::%player's uuid%} >= 5000:
+			#DP Remove
+			subtract 5000 from {DP::%player's uuid%} 
 			#Default Setting
 			set {_item} to netherite sword named "테스트스킨무기" with nbt from "{""max_damage"":10155,""damage"":1,""repair_cost"":999,""custom_model_data"":1}"
+			#add Line break to item lore
+			add " " to lore of {_item}
 			#Apply Attribute Modifier (With Chance)
 			chance of 50%:
-				add " " and "&r[ 추가옵션 ]" to lore of {_item}
-				chance of 50%:
-					set {_item} to AttackDamageModifier({_item}, 1, 10, 8) #네더라이트 검의 기본 데미지는 8
-				chance of 50%:
-					set {_item} to AttackSpeedModifier({_item}, 1, 20)
+				set {_item} to AttackDamageModifier({_item}, 1, 10, 8) #네더라이트 검의 기본 데미지는 8
+			chance of 50%:
+				set {_item} to AttackSpeedModifier({_item}, 1, 20)
 			#Hide Attribute
 			add hide attributes to item flags of {_item} 
 			#give item to player
