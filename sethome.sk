@@ -45,9 +45,12 @@ on inventory click:
 
 	else if clicked slot is 7: #셋홈 1번 이동 (비용 : 1000P, 쿨타임: 없음)
 		if {DP::%player's uuid%} >= 1000:
-			subtract 1000 from {DP::%player's uuid%}
-			teleport player to {sethome1::%player's uuid%.location}
-			send "1번에 지정된 위치인 %{sethome1::%player's uuid%.location}% 로 순간이동 하였습니다" to player
+			if {sethome1::%player's uuid%.location} is not set:
+				send "셋홈 위치가 지정이 되어있지 않습니다." to player
+			else:
+				subtract 1000 from {DP::%player's uuid%}
+				teleport player to {sethome1::%player's uuid%.location}
+				send "1번에 지정된 위치인 %{sethome1::%player's uuid%.location}% 로 순간이동 하였습니다" to player
 		else:
 			send "기부 포인트가 부족합니다. 1000 DP가 필요합니다" to player
 
@@ -87,9 +90,12 @@ on inventory click:
 
 	else if clicked slot is 16: #셋홈 2번 이동 (비용 : 3000 DP, 쿨타임: 없음)
 		if {DP::%player's uuid%} >= 3000:
-			subtract 3000 from {DP::%player's uuid%}
-			teleport player to {sethome2::%player's uuid%.location}
-			send "2번에 지정된 위치인 %{sethome2::%player's uuid%.location}% 로 순간이동 하였습니다" to player
+			if {sethome2::%player's uuid%.location} is not set:
+				send "셋홈 위치가 지정이 되어있지 않습니다." to player
+			else:
+				subtract 3000 from {DP::%player's uuid%}
+				teleport player to {sethome2::%player's uuid%.location}
+				send "2번에 지정된 위치인 %{sethome2::%player's uuid%.location}% 로 순간이동 하였습니다" to player
 		else:
 			send "기부 포인트가 부족합니다. 3000 DP가 필요합니다" to player
 
@@ -127,11 +133,14 @@ on inventory click:
 		else:
 			send "이동에 실패했습니다. 쿨타임이 %{_diff}% 만큼 남았습니다." to player
 
-	else if clicked slot is 25:
+	else if clicked slot is 25: #셋홈 2번 이동 (비용 : 5000 DP, 쿨타임: 없음)
 		if {DP::%player's uuid%} >= 5000:
-			subtract 5000 from {DP::%player's uuid%}
-			teleport player to {sethome3::%player's uuid%.location}
-			send "3번에 지정된 위치인 %{sethome3::%player's uuid%.location}% 로 순간이동 하였습니다" to player
+			if {sethome3::%player's uuid%.location} is not set:
+				send "셋홈 위치가 지정이 되어있지 않습니다." to player
+			else:
+				subtract 5000 from {DP::%player's uuid%}
+				teleport player to {sethome3::%player's uuid%.location}
+				send "3번에 지정된 위치인 %{sethome3::%player's uuid%.location}% 로 순간이동 하였습니다" to player
 		else:
 			send "기부 포인트가 부족합니다. 5000 DP가 필요합니다" to player
 
