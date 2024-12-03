@@ -28,7 +28,7 @@ function Sword_Skin_Purchase(p: player):
 	
 function AttackDamageModifier(item: item, minamount: integer, maxamount: integer, baseamount: integer) :: item:
 	set {_randomAmount} to random integer between {_minamount} and {_maxamount}
-	add "&6➤ &cATK &7+ &a%{_randomAmount}%" to lore of {_item}
+	add "[추가 옵션] &6➤ &cATK &7+ &a%{_randomAmount}%" to lore of {_item}
 	set {_finalAmount} to {_randomAmount} + {_baseamount} - 1
 	apply attribute modifier to {_item}:
 		attribute: attack damage
@@ -45,7 +45,7 @@ function AttackDamageModifier(item: item, minamount: integer, maxamount: integer
 
 function AttackSpeedModifier(item: item, minamount: integer, maxamount: integer) :: item:
 	set {_randomAmount} to random integer between {_minamount} and {_maxamount}
-	add "&6➤ &cDLY &7- &a%{_randomAmount}%%%" to lore of {_item}
+	add "[추가 옵션] &6➤ &cDLY &7- &a%{_randomAmount}%%%" to lore of {_item}
 	set {_scaledAmount} to {_randomAmount} / 100
 	apply attribute modifier to {_item}:
 		attribute: attack speed
@@ -61,7 +61,7 @@ function AttackSpeedModifier(item: item, minamount: integer, maxamount: integer)
 #예제 : set {_item} to MaxHealthAttributeModifier({_item}, 2, 5, "head_slot_group") => {_item}을 "head_slot_group"에 착용했을 때 maxHealth를 2 ~ 5 추가한다.
 function MaxHealthAttributeModifier(item: item, minamount: integer, maxamount: integer, slotGroup: string) :: item:
 	set {_randomAmount} to random integer between {_minamount} and {_maxamount}
-	add "&6➤ &cMaxHealth &7+ &a%{_randomAmount}%" to lore of {_item}
+	add "[추가 옵션] &6➤ &cMaxHealth &7+ &a%{_randomAmount}%" to lore of {_item}
 	set {_scaledAmount} to {_randomAmount}
 	apply attribute modifier to {_item}:
 		attribute: max health
@@ -77,7 +77,7 @@ function MaxHealthAttributeModifier(item: item, minamount: integer, maxamount: i
 #예제 : set {_item} to ArmorToughnessAttributeModifier({_item}, 2, 5, "head_slot_group") => {_item}을 "head_slot_group"에 착용했을 때 ArmorToughness를 2 ~ 5 추가한다.
 function ArmorToughnessAttributeModifier(item: item, minamount: integer, maxamount: integer, slotGroup: string) :: item:
 	set {_randomAmount} to random integer between {_minamount} and {_maxamount}
-	add "&6➤ &cAT &7+ &a%{_randomAmount}%" to lore of {_item}
+	add "[추가 옵션] &6➤ &cAT &7+ &a%{_randomAmount}%" to lore of {_item}
 	apply attribute modifier to {_item}:
 		attribute: armor toughness
 		id: "armortoughness"
@@ -92,7 +92,7 @@ function ArmorToughnessAttributeModifier(item: item, minamount: integer, maxamou
 #예제 : set {_item} to MovementSpeedAttributeModifier({_item}, 2, 5, "head_slot_group") => {_item}을 "head_slot_group"에 착용했을 때 movement speed를 2 ~ 5% 추가한다.
 function MovementSpeedAttributeModifier(item: item, minamount: integer, maxamount: integer, slotGroup: string) :: item:
 	set {_randomAmount} to random integer between {_minamount} and {_maxamount}
-	add "&6➤ &cSPD &7-&a%{_randomAmount}%%%" to lore of {_item}
+	add "[추가 옵션] &6➤ &cSPD &7-&a%{_randomAmount}%%%" to lore of {_item}
 	set {_scaledAmount} to {_randomAmount} / 100
 	apply attribute modifier to {_item}:
 		attribute: movement speed
@@ -110,13 +110,18 @@ on inventory click:
 	cancel event
 	event-inventory is not player's inventory
 	if clicked slot is 1:
-		send "You clicked on slot 1"
+		close player's inventory
+		send "준비중"
 	else if clicked slot is 3:
-		send "You clicked on slot 3"
+		close player's inventory
+		send "준비중"
 	else if clicked slot is 5:
-		send "You clicked on slot 5"
+		close player's inventory
+		Sword_Skin_Purchase(player)
 	else if clicked slot is 7:
-		send "You clicked on slot 7"
+		close player's inventory
+		send "준비중"
+	
 
 #검 스킨 페이지
 on inventory click:
@@ -142,3 +147,5 @@ on inventory click:
 			give player 1 of {_item}
 		else:
 			send "기부 포인트가 부족합니다." to player
+			
+		close player's inventory
