@@ -46,3 +46,10 @@ on break of fully grown wheat plant or fully grown carrot plant or fully grown p
 			chance of 50%:
 				set {_additionalplant} to random integer between 0 and 2
 				drop {_additionalplant} of bitroot
+
+command /자동심기:
+	trigger:
+		if {DP::%player's uuid%} >= 3500:
+			[대충 퍼미션 주는 코드]
+		else:
+			send "기부 포인트가 부족합니다. 필요한 기부 포인트는 3500 입니다" to player
