@@ -133,14 +133,14 @@ on inventory click:
 			#DP Remove
 			subtract 5000 from {DP::%player's uuid%} 
 			#Default Setting
-			set {_item} to netherite sword named "테스트스킨무기" with nbt from "{""max_damage"":10155,""damage"":1,""repair_cost"":999,""custom_model_data"":1}"
+			set {_item} to netherite sword named "테스트스킨무기" with lore "This Is TEST Weapon" with nbt from "{""max_damage"":10155,""damage"":1,""repair_cost"":999,""custom_model_data"":1}" 
 			#add Line break to item lore
 			add " " to lore of {_item}
 			#Apply Attribute Modifier (With Chance)
 			chance of 50%:
-				set {_item} to AttackDamageModifier({_item}, 1, 10, 8) #네더라이트 검의 기본 데미지는 8
+				set {_item} to AttackDamageModifier({_item}, 1, 5, 8) #네더라이트 검의 기본 데미지는 8
 			chance of 50%:
-				set {_item} to AttackSpeedModifier({_item}, 1, 20)
+				set {_item} to AttackSpeedModifier({_item}, 1, 5)
 			#Hide Attribute
 			add hide attributes to item flags of {_item} 
 			#give item to player
