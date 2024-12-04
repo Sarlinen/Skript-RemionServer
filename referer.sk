@@ -1,0 +1,36 @@
+command /추천인 [<text>] [<text>]:
+	trigger:
+		if arg 1 is not set:
+			send "&f/추천인 [닉네임] - 추천인에게 아이템을 지급합니다"
+			send "&f많은 홍보 부탁드립니다."
+			if player is op:
+				send "&f=== 관리자 명령어 ==="
+				send "&f/추천인 삭제 [닉네임] - 추천인 변수를 삭제합니다."
+				send "&f/추천인 초기화 - 모든 추천인 변수를 초기화합니다."
+		if player is op:	
+			if arg 1 is "삭제":
+				if arg 2 is set:
+					delete {recommand::%arg 2%}
+					send "&6%arg 2%&f님의 추천인 변수를 삭제 하였습니다."
+			if arg 1 is "초기화":
+				delete {recommand::*}
+				send "&e모든 추천인 변수를 초기화 하였습니다."
+		if arg 1 is not "아이템" or "삭제" or "초기화":
+			if arg 1 is set:
+				if {recommand::%player%} is set:
+					send "&c이미 추천인을 등록 하였습니다!"
+					stop
+				if player is arg 1 parsed as player:
+					send "&c자신에게 추천을 할 수 없습니다!"
+					stop
+				if arg 1 parsed as player is online:
+					set {_refererplayer} to arg 1's uuid
+					set {recommand::%player%} to true
+					add 200 to {DP::%player's uuid%}
+					send "&6%arg 1%&f님을 추천인으로 등록 하였습니다! 추천인 입력 보상으로 200 기부 포인트가 적립이 되었습니다."
+					add 200 to {DP::%{_refererplayer}%}
+					send "&6%player%&f님이 당신을 추천인으로 등록 하였습니다! 추천인 보상으로 200 기부 포인트가 적립이 되었습니다." to arg 1 parsed as player
+					
+				else:
+					send "&c추천인이 접속중이 아닙니다!"
+			
