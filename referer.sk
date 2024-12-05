@@ -1,7 +1,7 @@
 command /추천인 [<text>] [<text>]:
 	trigger:
 		if arg 1 is not set:
-			send "&f/추천인 [닉네임] - 추천인에게 아이템을 지급합니다"
+			send "&f/추천인 [닉네임] - 추천인을 지정합니다. 추천인과 추천한 사람에게 각각 200DP를 적립해드립니다."
 			send "&f많은 홍보 부탁드립니다."
 			if player is op:
 				send "&f=== 관리자 명령어 ==="
