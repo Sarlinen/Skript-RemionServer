@@ -141,6 +141,8 @@ on inventory click:
 				set {_item} to AttackDamageModifier({_item}, 1, 5, 8) #네더라이트 검의 기본 데미지는 8
 			chance of 50%:
 				set {_item} to AttackSpeedModifier({_item}, 1, 5)
+			#ItemBind (해당 구문은 keepinven.sk에 추가)
+			add " " and "Item Binded" to lore of {_item}
 			#Hide Attribute
 			add hide attributes to item flags of {_item} 
 			#give item to player
