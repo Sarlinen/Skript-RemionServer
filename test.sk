@@ -151,3 +151,9 @@ on inventory click:
 			send "기부 포인트가 부족합니다." to player
 			
 		close player's inventory
+
+#-------------------------
+
+on command /skin:
+	trigger:
+		Skin_Purchase_main(player)
